@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  argosbx:
+    build: .
+    container_name: argosbx
+    hostname: argosbx-server
+    restart: unless-stopped
+    environment:
+      - uuid=  # 可选：自定义UUID
+      - vlpt=  # 可选：Vless端口
+      - vmpt=  # 可选：VMess端口  
+      - hypt=  # 可选：Hysteria2端口
+      - tupt=  # 可选：Tuic端口
+      - xhpt=  # 可选：Vless-xhttp-reality端口
+      - vxpt=  # 可选：Vless-xhttp端口
+      - anpt=  # 可选：AnyTLS端口
+      - arpt=  # 可选：Any-Reality端口
+      - sspt=  # 可选：Shadowsocks端口
+      - sopt=  # 可选：Socks5端口
+      - reym=apple.com  # Reality域名
+      - cdnym=  # CDN域名
+      - argo=  # 启用Argo隧道
+      - ARGO_DOMAIN=  # Argo固定域名
+      - ARGO_AUTH=    # Argo认证token
+      - ippz=  # IP显示偏好：4=IPv4, 6=IPv6
+      - warp=  # WARP配置
+      - name=  # 节点名称前缀
+    ports:
+      # 暴露常用端口范围，根据需要调整
+      - "10000-65535:10000-65535"
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    volumes:
+      # 可选：持久化配置数据
+      - agsbx_data:/root/agsbx
+    tty: true
+    stdin_open: true
+
+volumes:
+  agsbx_data:
